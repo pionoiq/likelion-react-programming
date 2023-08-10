@@ -2,9 +2,25 @@
 import reactImagePath from '@/assets/react.svg';
 import viteImagePath from '@/assets/vite.svg';
 
+/* -------------------------------------------------------------------------- */
+
+// 데이터 가져오기(fetch data)
+// 비동기 함수(async function)
+// RESTful API (C.R.U.D)
+
+// client → server (요청, Request)
+// client ← server (응답, Response)
+
+// 통신 상태
+// - isPending (대기 중)
+// - isLoading (로딩 중)
+// - isSuccess (데이터 요청/응답 성공 수신)
+// - isError (데이터 요청 실패)
+const status = 'isSuccess';
+
 /* 컴포넌트 --------------------------------------------------------------------- */
 
-function ConditionalRendering({ imageType }) {
+function ConditionalRendering({ hidden, imageType }) {
   // 2-1. 조건 문 (함수 몸체(function body) 내부 사용)
   // let imageComponent; // undefined
 
@@ -17,6 +33,15 @@ function ConditionalRendering({ imageType }) {
 
   // 2-2. 조건 식 (함수 몸체 또는 JSX 내부 사용)
 
+  // if 또는 switch 문 사용
+  switch(status) {
+    case 'isPending': return <p>대기 중입니다.</p>
+    case 'isLoading': return <p>로딩 중입니다.</p>
+    case 'isError': return <p>오류 발생했어요.</p>
+    default:
+  }
+
+
   // 2-2-1. 3항 연산식
   const imageComponent =
     imageType === 'vite' ? (
@@ -25,14 +50,16 @@ function ConditionalRendering({ imageType }) {
       <img src={reactImagePath} alt="리액트" />
     );
 
+  console.log(imageComponent);
+
   const isReactImage = imageType === 'react';
   const imageLabel = isReactImage ? 'React' : 'Vite';
 
-  const isShowImage = false;
+  const isShowImage = true;
   const isntShowImageLabel = false;
 
   return (
-    <>
+    <div hidden={hidden}>
       <dt>조건부 렌더링(conditional rendering)</dt>
       <dd>
         <p>이미지 타입(image type)에 따라 렌더링 여부를 결정합니다.</p>
@@ -73,12 +100,21 @@ function ConditionalRendering({ imageType }) {
       <dd style={{ marginTop: 12 }}>
         <p>spinner 또는 vite 이미지가 랜덤으로 화면에 렌더링 되도록 합니다.</p>
         <div className="conditionalRendering">
-          <img className="spinner" src="/spinner.svg" alt="로딩 중..." />
-          <img src="/vite.svg" alt="Vite" style={{ height: 42 }} />
+          {
+            renderRandomImageOrSpinner()
+          }
         </div>
       </dd>
-    </>
+    </div>
   );
+}
+
+function renderRandomImageOrSpinner() {
+  return Math.random() >= 0.5 ? (
+    <img className="spinner" src="/spinner.svg" alt="로딩 중..." />
+  ) : (
+    <img src="/vite.svg" alt="Vite" style={{ height: 42 }} />
+  )
 }
 
 export default ConditionalRendering;
