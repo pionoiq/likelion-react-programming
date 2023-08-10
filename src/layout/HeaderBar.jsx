@@ -5,7 +5,7 @@ function HeaderBar() {
     <header>
       <Heading />
     </header>
-  );
+  )
 }
 
 export default HeaderBar;
