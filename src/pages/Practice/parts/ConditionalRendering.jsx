@@ -34,13 +34,15 @@ function ConditionalRendering({ hidden, imageType }) {
   // 2-2. 조건 식 (함수 몸체 또는 JSX 내부 사용)
 
   // if 또는 switch 문 사용
-  switch(status) {
-    case 'isPending': return <p>대기 중입니다.</p>
-    case 'isLoading': return <p>로딩 중입니다.</p>
-    case 'isError': return <p>오류 발생했어요.</p>
+  switch (status) {
+    case 'isPending':
+      return <p>대기 중입니다.</p>;
+    case 'isLoading':
+      return <p>로딩 중입니다.</p>;
+    case 'isError':
+      return <p>오류 발생했어요.</p>;
     default:
   }
-
 
   // 2-2-1. 3항 연산식
   const imageComponent =
@@ -50,7 +52,7 @@ function ConditionalRendering({ hidden, imageType }) {
       <img src={reactImagePath} alt="리액트" />
     );
 
-  console.log(imageComponent);
+  // console.log(imageComponent);
 
   const isReactImage = imageType === 'react';
   const imageLabel = isReactImage ? 'React' : 'Vite';
@@ -100,9 +102,7 @@ function ConditionalRendering({ hidden, imageType }) {
       <dd style={{ marginTop: 12 }}>
         <p>spinner 또는 vite 이미지가 랜덤으로 화면에 렌더링 되도록 합니다.</p>
         <div className="conditionalRendering">
-          {
-            renderRandomImageOrSpinner()
-          }
+          {renderRandomImageOrSpinner()}
         </div>
       </dd>
     </div>
@@ -114,7 +114,7 @@ function renderRandomImageOrSpinner() {
     <img className="spinner" src="/spinner.svg" alt="로딩 중..." />
   ) : (
     <img src="/vite.svg" alt="Vite" style={{ height: 42 }} />
-  )
+  );
 }
 
 export default ConditionalRendering;

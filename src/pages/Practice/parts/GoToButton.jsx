@@ -1,4 +1,4 @@
-function GoToButton({ direction, label }) {
+function GoToButton({ direction, label, ...restProps /* 나머지 속성 전개 */ }) {
   // let className = '';
   // if (direction === 'down') {
   //   className = 'scrollDown';
@@ -13,6 +13,7 @@ function GoToButton({ direction, label }) {
       className={direction}
       aria-label={label}
       title={label}
+      {...restProps}
     >
       <svg
         fill="currentColor"
